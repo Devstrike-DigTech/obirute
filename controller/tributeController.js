@@ -7,7 +7,6 @@ const catchAsync = require('../utils/catchAsync');
 
 //create Blog
 exports.create = catchAsync(async (req, res, next) => {
-  console.log(req.body);
   const tribute = await Tribute.create(req.body);
 
   res.status(201).json({

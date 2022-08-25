@@ -7,7 +7,14 @@ const router = express.Router();
 
 // router.use(authController.restrictTo('admin'))
 
-router.route('/').post(deceasedController.create).get(deceasedController.get);
+router
+  .route('/')
+  .post(
+    deceasedController.uploadFiles,
+    deceasedController.addFileToReqBody,
+    deceasedController.create
+  )
+  .get(deceasedController.get);
 
 router.route('/:id').patch(deceasedController.update);
 
