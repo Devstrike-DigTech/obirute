@@ -8,7 +8,14 @@ const router = express.Router();
 
 // router.use(authController.restrictTo('admin'))
 
-router.route('/').post(tributeController.create).get(tributeController.getAll);
+router
+  .route('/')
+  .post(
+    tributeController.uploadFile,
+    tributeController.addFileToReqBody,
+    tributeController.create
+  )
+  .get(tributeController.getAll);
 
 router
   .route('/:id')

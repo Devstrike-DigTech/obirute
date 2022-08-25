@@ -34,8 +34,8 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     required: [true, 'You must have a role'],
-    enum: ['admin'],
-    default: 'admin',
+    enum: ['user', 'admin'],
+    default: 'user',
   },
   passwordChangedAt: Date,
   photo: {

@@ -4,6 +4,8 @@ const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const userRouter = require('./routes/userRoutes');
 const blogRouter = require('./routes/blogRoutes');
+const tributeRouter = require('./routes/tributeRoutes');
+const deceasedRouter = require('./routes/deceasedRoutes');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controller/errorController');
 
@@ -18,6 +20,7 @@ app.use(cors());
 
 //body parser, reading data from body into req.body
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //testing middleware
@@ -30,6 +33,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/blogs', blogRouter);
+app.use('/api/v1/deceased', deceasedRouter);
+app.use('/api/v1/tributes', tributeRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));

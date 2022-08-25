@@ -7,6 +7,7 @@ const catchAsync = require('../utils/catchAsync');
 
 //create Blog
 exports.create = catchAsync(async (req, res, next) => {
+  console.log(req.body);
   const tribute = await Tribute.create(req.body);
 
   res.status(201).json({
@@ -85,7 +86,8 @@ exports.delete = catchAsync(async (req, res, next) => {
 //multer
 const multerStorageImage = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '/public/images'));
+    // console.log(req);
+    cb(null, path.join(__dirname, '../public/img/uploads'));
   },
   filename: (req, file, cb) => {
     cb(null, `image_${Date.now()}${path.extname(file.originalname.trim())}`);
@@ -104,12 +106,12 @@ const upload = multer({
   storage: multerStorageImage,
   fileFilter: multerFilterImage,
 });
-exports.uploadFile = upload.single('photo');
+exports.uploadFile = upload.single('image');
 
 exports.addFileToReqBody = (req, res, next) => {
-  console.log(req.file.filename);
-
-  req.body.images = req.file.filename;
+  if (req.file) {
+    req.body.image = req.file.filename;
+  }
 
   next();
 };
