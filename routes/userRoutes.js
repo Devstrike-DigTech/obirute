@@ -1,18 +1,23 @@
 const express = require('express');
 const userController = require('../controller/userController');
 const authController = require('../controller/authController');
+const validationController = require('../controller/validationController');
+const validate = require('../validations/user');
 
 const router = express.Router();
 
-router.route('/signup').post(authController.signup)
-router.route('/login').post(authController.login)
+router.route('/signup').post(authController.signup);
+router
+  .route('/login')
+  .post(
+    validationController.validationMiddleware(validate.login),
+    authController.login
+  );
 router.get('/logout', authController.logout);
 router.post('/forgotPassword', authController.forgotPassword);
 router.patch('/resetPassword/:token', authController.resetPassword);
 
-
-router.use(authController.protect)
-
+router.use(authController.protect);
 
 router.patch(
   '/updateMe',
@@ -24,21 +29,16 @@ router.patch(
 router.get('/me', userController.getMe, userController.getUser);
 router.delete('/deleteMe', userController.deleteMe);
 
-router.use(authController.restrictTo('admin'))
+router.use(authController.restrictTo('admin'));
 
 router
   .route('/')
-  .get(
-    userController.getAllUsers)
-  .delete( 
-    userController.getAllUsers);
-
+  .get(userController.getAllUsers)
+  .delete(userController.getAllUsers);
 
 router
   .route('/:id')
-  .delete(
-    userController.deleteUser)
-  .get(
-    userController.getUser)
+  .delete(userController.deleteUser)
+  .get(userController.getUser);
 
 module.exports = router;
