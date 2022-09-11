@@ -1,10 +1,13 @@
 import React from 'react';
-import './index.css';
 import { useState, useEffect } from 'react';
+import './index.css';
+// import Aos from 'aos';
+// import 'aos/dist/aos.css';
 import ReactPaginate from 'react-paginate';
 import Modal from '../../../components/Modal/index';
+import { useLocation } from 'react-router-dom';
 
-const Home = ({ tributes }) => {
+const Home = ({ tributes, deceased }) => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
@@ -17,10 +20,12 @@ const Home = ({ tributes }) => {
   const [tribute, setTribute] = useState('peoples Tribute');
 
   useEffect(() => {
+    // if (tributes > 0) {
     const endOffset = itemOffset + itemsPerPage;
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(tributes.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(tributes.length / itemsPerPage));
+    // }
   }, [itemOffset, itemsPerPage, tributes]);
 
   const handlePageClick = (event) => {
@@ -40,14 +45,7 @@ const Home = ({ tributes }) => {
     if (val === 'main') {
       setName('Family');
       setHeading('Tribute to Mama');
-      setTribute(`Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-      reiciendis. Eum laboriosam nostrum deserunt alias. Velit
-      blanditiis veritatis nobis eveniet quod voluptatum in sequi,
-      debitis necessitatibus alias? Non, maiores ratione?
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-      reiciendis. Eum laboriosam nostrum deserunt alias. Velit
-      blanditiis veritatis nobis eveniet quod voluptatum in sequi,
-      debitis necessitatibus alias? Non, maiores ratione?`);
+      setTribute(deceased.bio);
     } else {
       setHeading(tributes[val].heading);
       setTribute(tributes[val].tribute);
@@ -58,104 +56,72 @@ const Home = ({ tributes }) => {
 
   return (
     <>
-      {/* navbar  */}
-      <nav className="container mx-auto p-2 bg-veryLightGray">
-        <div className="flex items-center justify-between">
-          <div className="logo">Obirute</div>
-          <ul>
-            <li>
-              <a
-                className="text-white rounded-md bg-slate-500 px-4 py-2"
-                href="/write"
-              >
-                write tribute
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
-      {/* hero section */}
-      <section id="hero">
-        <div className="container flex flex-col-reverse md:flex-row space-y-0 md:space-y-0 mt-10 mx-auto">
-          {/* biography goes here */}
-          <div className="flex flex-col mb-3 md:w-1/2">
-            <h1 className="max-w-md text-2xl font-bold text-center md:5xl md:text-left text-gray-600">
-              Tribute to Our Mom, sister, wife, grandmother and friend.
-            </h1>
-
-            <p className="max-w-sm text-left md:text-left py-4 text-slate-600 text-lg leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-              reiciendis. Eum laboriosam nostrum deserunt alias. Velit
-              blanditiis veritatis nobis eveniet quod voluptatum in sequi,
-              debitis necessitatibus alias? Non, maiores ratione?
+      <section className="px-3 py-5 bg-neutral-100 lg:py-10">
+        <div className="grid lg:grid-cols-2 items-center justify-items-center gap-5">
+          <div className="order-2 lg:order-1 flex flex-col justify-center items-center">
+            <p
+              className="text-4xl font-bold md:text-7xl text-orange-600"
+              data-aos="fade-right"
+            >
+              Biography
             </p>
-
-            <p className="max-w-sm text-left md:text-left py-4 text-slate-600 text-lg leading-relaxed">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus,
-              reiciendis. Eum laboriosam nostrum deserunt alias. Velit
-              blanditiis veritatis nobis eveniet quod voluptatum in sequi,
-              debitis necessitatibus alias? Non, maiores ratione?
+            <p className="text-4xl font-bold md:text-7xl" data-aos="fade-in">
+              Mrs Nk Uzor
             </p>
-
-            <div className="flex justify-center md:justify-start">
-              <button
-                className="rounded-full p-1 px-6 baseline hover:bg-brightRedLight text-veryDarkBlue bg-veryLightGray"
-                onClick={() => openPopup('main')}
-              >
-                Read more
-              </button>
-            </div>
+            <p className="mt-2 text-sm md:text-lg">1956 - 2022</p>
+            <button
+              className="text-lg md:text-2xl bg-black text-white py-2 px-5 mt-10 hover:bg-zinc-800"
+              onClick={() => openPopup('main')}
+            >
+              Read
+            </button>
           </div>
-          {/* images */}
-          <div className="md:w-1/2">
-            <img
-              src="images.jpeg"
-              alt="Rest well mama"
-              className="h-full w-full object-cover"
-            />
+          <div className="order-1 lg:order-2">
+            {deceased.images && (
+              <img
+                className="h-80 w-80 object-cover lg:w-[500px] lg:h-[500px]"
+                src={`http://localhost:5000/images/uploads/${deceased.images[1]}`}
+                alt=""
+              />
+            )}
           </div>
         </div>
       </section>
 
       {/* tributes */}
       <section id="tributes">
-        <div className="max-w-6xl px-5 mx-auto mt-32 text-center">
-          <h2 className="text-4xl font-bold text-center text-gray-600">
+        <div className="max-w-6xl px-5 mx-auto mt-12 text-center">
+          <h2
+            className="text-4xl font-bold text-center text-gray-600"
+            data-aos="fade-in"
+          >
             Tributes to Mama
           </h2>
 
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 mt-24 gap-10">
-            {currentItems.map((e, i) => (
-              <div
-                key={i}
-                className="items-center p-6 space-y-6 rounded-lg bg-veryLightGray"
-              >
-                <h5 className="text-lg font-bold text-gray-600">{e.name}</h5>
-                <p className="text-sm text-darkGrayishBlue leading-relaxed">
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                  Omnis voluptates laborum, assumenda ullam, similique fugit
-                  officia ducimus exercitationem maxime dolor quos voluptas
-                  cupiditate sit repellendus vero dicta aliquid consectetur
-                  nostrum!
-                </p>
-                <div className="text-center">
-                  <button
-                    className="rounded-full p-1 px-6 baseline hover:bg-brightRedLight text-darkGrayishBlue bg-brightRedSupLight"
-                    onClick={() => openPopup(i)}
-                  >
-                    Read more
-                  </button>
-                  {/* <Modal
-                    dialog={dialog}
-                    name="Abu abubata"
-                    tribute={e.tribute}
-                    closeModal={closePopup}
-                  ></Modal> */}
+          {tributes && (
+            <div className="grid lg:grid-cols-3 md:grid-cols-2 mt-24 gap-10">
+              {currentItems.map((e, i) => (
+                <div
+                  key={i}
+                  className="items-center p-6 space-y-6 rounded-lg bg-neutral-100"
+                  data-aos="fade-up"
+                >
+                  <h5 className="text-lg font-bold text-gray-600">{e.name}</h5>
+                  <p className="text-sm text-darkGrayishBlue leading-relaxed">
+                    {e.tribute}
+                  </p>
+                  <div className="text-center">
+                    <button
+                      className="rounded-full p-1 px-6 baseline hover:bg-brightRedLight text-darkGrayishBlue bg-brightRedSupLight"
+                      onClick={() => openPopup(i)}
+                    >
+                      Read more
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -182,10 +148,6 @@ const Home = ({ tributes }) => {
         heading={heading}
         closeModal={closePopup}
       ></Modal>
-
-      <footer className="container mx-auto bg-veryLightGray py-6 px-2 mt-32">
-        <div className="flex items-center justify-between">Devstrike</div>
-      </footer>
     </>
   );
 };

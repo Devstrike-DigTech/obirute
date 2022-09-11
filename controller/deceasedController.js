@@ -41,7 +41,6 @@ exports.get = catchAsync(async (req, res, next) => {
 //multer
 const multerStorageImage = multer.diskStorage({
   destination: (req, file, cb) => {
-    // console.log(req);
     cb(null, path.join(__dirname, '../public/img/uploads'));
   },
   filename: (req, file, cb) => {

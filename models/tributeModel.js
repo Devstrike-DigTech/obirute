@@ -6,6 +6,10 @@ const tributeSchema = new Schema({
     required: [true, 'A tribute must have an author'],
     trim: true,
   },
+  heading: {
+    type: String,
+    required: [true, 'Tribute heading is required'],
+  },
   relationship: {
     type: String,
     trim: true,

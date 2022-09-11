@@ -1,5 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
+import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Write = () => {
   const [name, setName] = useState('');
@@ -7,13 +9,15 @@ const Write = () => {
   const [phone, setPhone] = useState('');
   const [image, setImage] = useState(null);
   const [tribute, setTribute] = useState('');
+  const [heading, setHeading] = useState('');
 
   // Error variables
   const [nameError, setNameError] = useState('');
   const [relationshipError, setRelationshipError] = useState('');
   const [tributeError, setTributeError] = useState('');
+  const [headingError, setHeadingError] = useState('');
 
-  const submitRequest = (e) => {
+  const submitRequest = async (e) => {
     e.preventDefault();
 
     //validate input
@@ -25,59 +29,60 @@ const Write = () => {
       return setRelationshipError('Relationship to mama should be stated.');
     }
     if (!tribute) return setTributeError('tribute is required.');
-    const data = {
-      name,
-      relationship,
-      phone,
-      image,
-      tribute,
-    };
-    console.log(data);
+    if (!heading) return setHeadingError('heading is required.');
+
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('relationship', relationship);
+    formData.append('heading', heading);
+    formData.append('tribute', tribute);
+    if (image) {
+      formData.append('image', image);
+    }
+    if (phone) {
+      formData.append('phone', phone);
+    }
+    await sendTribute(formData);
+  };
+
+  const sendTribute = async (data) => {
+    try {
+      const res = await axios.post(
+        'http://localhost:5000/api/v1/tributes',
+        data
+      );
+      console.log(res);
+      toast.success('Tribute submitted successfully!', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        className: {
+          background: '#00FF00 !important',
+        },
+      });
+      setName('');
+      setPhone('');
+      setRelationship('');
+      setImage(null);
+      setHeading('');
+      setTribute('');
+    } catch (error) {
+      toast.error('Error! Something went wrong', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+    }
   };
 
   const tributeChange = (e) => {
     setTribute(e.target.value);
-
-    // const trib = tribute.split(' ');
-    // const isLess = trib.length < 5;
-    // if (isLess) {
-    //   setTribute(e.target.value);
-    // } else {
-    //   return setTributeError('tribute should be less than 5 words');
-    // }
   };
-
-  // const keyUp = (e) => {
-  //   const trib = tribute.split(' ');
-  //   const isLess = trib.length < 5;
-  //   if (!isLess) {
-  //     if (e.keyCode == 8 || e.keyCode == 46) {
-  //       const newTrib = tribute.split('');
-  //       const newOne = newTrib.slice(0, 1);
-  //       console.log(newOne);
-  //       // setTribute(newTrib);
-  //     }
-  //   }
-  // };
 
   return (
     <>
-      <nav className="container mx-auto p-2 bg-veryLightGray">
-        <div className="flex items-center justify-between">
-          <div className="logo">Obirute</div>
-          <ul>
-            <li>
-              <a
-                className="text-white rounded-md bg-slate-500 px-4 py-2"
-                href="/"
-              >
-                Home
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-
       <section className="pt-16">
         <div className="container items-center justify-center flex flex-col-reverse md:flex-row space-y-0 md:space-y-0 mt-10 mx-auto">
           <form className="w-full  p-4" onSubmit={submitRequest}>
@@ -106,19 +111,17 @@ const Write = () => {
                 </label>
                 <input
                   className={
-                    relationshipError
+                    headingError
                       ? 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                       : 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                   }
                   id="grid-last-name"
                   type="text"
-                  placeholder="Doe"
-                  value={relationship}
-                  onChange={(e) => setRelationship(e.target.value)}
+                  placeholder="Friend"
+                  value={heading}
+                  onChange={(e) => setHeading(e.target.value)}
                 />
-                <p className="text-red-500 text-xs italic">
-                  {relationshipError}
-                </p>
+                <p className="text-red-500 text-xs italic">{headingError}</p>
               </div>
             </div>
             <div className="flex flex-wrap -mx-3 mb-6">
@@ -130,7 +133,7 @@ const Write = () => {
                   className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
                   id="grid-first-name"
                   type="text"
-                  placeholder="Your fullname"
+                  placeholder="0800000000"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                 />
@@ -147,6 +150,24 @@ const Write = () => {
                   onChange={(e) => setImage(e.target.files[0])}
                 />
               </div>
+            </div>
+            <div>
+              <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
+                *Heading
+              </label>
+              <input
+                className={
+                  relationshipError
+                    ? 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                    : 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
+                }
+                id="grid-last-name"
+                type="text"
+                placeholder="Tribute to my beloved"
+                value={relationship}
+                onChange={(e) => setRelationship(e.target.value)}
+              />
+              <p className="text-red-500 text-xs italic">{relationshipError}</p>
             </div>
             <div>
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
