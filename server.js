@@ -5,9 +5,11 @@ const app = require('./app');
 
 dotenv.config({ path: './config.env' });
 
-const DB = process.env.DATABASE_LOCAL;
-// const DB = 'mongodb://127.0.0.1:27017/blog';
-
+// const DB = process.env.DATABASE_LOCAL;
+const DB = process.env.DATABASE.replace(
+  '<password>',
+  process.env.DATABASE_PASSWORD
+);
 mongoose
   .connect(DB, {
     useNewUrlParser: true,

@@ -85,11 +85,17 @@ exports.delete = catchAsync(async (req, res, next) => {
 //multer
 const multerStorageImage = multer.diskStorage({
   destination: (req, file, cb) => {
-    // console.log(req);
+    console.log(req.body);
     cb(null, path.join(__dirname, '../public/img/uploads'));
   },
   filename: (req, file, cb) => {
-    cb(null, `image_${Date.now()}${path.extname(file.originalname.trim())}`);
+    console.log(req.body);
+    cb(
+      null,
+      `image_${req.body.name.replace(/\s/g, '')}_${Date.now()}${path.extname(
+        file.originalname.trim()
+      )}`
+    );
   },
 });
 

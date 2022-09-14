@@ -39,6 +39,13 @@ app.use('/api/v1/blogs', blogRouter);
 app.use('/api/v1/deceased', deceasedRouter);
 app.use('/api/v1/tributes', tributeRouter);
 
+if (true) {
+  app.use(express.static(`${__dirname}/client/build`));
+  app.get(/.*/, (req, res) =>
+    res.sendFile(`${__dirname}/client/build/index.html`)
+  );
+}
+
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on this server`, 404));
 });

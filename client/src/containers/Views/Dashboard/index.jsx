@@ -1,41 +1,36 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import './index.css';
+// import './index.css';
 import ReactPaginate from 'react-paginate';
 import Modal from '../../../components/Modal/index';
-import { useNavigate, useLocation } from 'react-router-dom';
 
-const Home = ({ tributes, deceased }) => {
+const Dashboard = ({ tributes }) => {
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const [dialog, setDialog] = useState(false);
   const itemsPerPage = 12;
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
   //dialog props
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
   const [tribute, setTribute] = useState('peoples Tribute');
+  const [image, setImage] = useState('');
 
   useEffect(() => {
+    // if (tributes > 0) {
     const endOffset = itemOffset + itemsPerPage;
     console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(tributes.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(tributes.length / itemsPerPage));
-    console.log(pageCount);
-
-    // if (location.search) {
-    //   const newPage = location.search.split('?');
-    //   setPageCount(newPage[1]);
     // }
   }, [itemOffset, itemsPerPage, tributes]);
 
   const handlePageClick = (event) => {
-    // navigate({ pathname: `/`, search: `${pageCount}` });
     const newOffset = (event.selected * itemsPerPage) % tributes.length;
+    console.log(
+      `User requested page number ${event.selected}, which is offset ${newOffset}`
+    );
     setItemOffset(newOffset);
     var getMeTo = document.getElementById('tributes');
     getMeTo.scrollIntoView({ behavior: 'smooth' }, true);
@@ -45,52 +40,15 @@ const Home = ({ tributes, deceased }) => {
     setDialog(false);
   };
   const openPopup = (val) => {
-    if (val === 'main') {
-      setName('Family');
-      setHeading('Tribute to Mama');
-      setTribute(deceased.bio);
-    } else {
-      setHeading(currentItems[val].heading);
-      setTribute(currentItems[val].tribute);
-      setName(currentItems[val].name);
-    }
+    setHeading(currentItems[val].heading);
+    setTribute(currentItems[val].tribute);
+    setName(currentItems[val].name);
+    setImage(currentItems[val].image);
     setDialog(true);
   };
 
   return (
     <>
-      <section className="px-3 py-5 bg-neutral-100 lg:py-10">
-        <div className="grid lg:grid-cols-2 items-center justify-items-center gap-5">
-          <div className="order-2 lg:order-1 flex flex-col justify-center items-center">
-            <p
-              className="text-4xl font-bold md:text-7xl text-orange-600"
-              data-aos="fade-right"
-            >
-              Biography
-            </p>
-            <p className="text-4xl font-bold md:text-7xl" data-aos="fade-in">
-              Mrs Nk Uzor
-            </p>
-            <p className="mt-2 text-sm md:text-lg">1956 - 2022</p>
-            <button
-              className="text-lg md:text-2xl bg-black text-white py-2 px-5 mt-10 hover:bg-zinc-800"
-              onClick={() => openPopup('main')}
-            >
-              Read
-            </button>
-          </div>
-          <div className="order-1 lg:order-2">
-            {deceased.images && (
-              <img
-                className="h-80 w-80 object-cover lg:w-[500px] lg:h-[500px]"
-                src={`http://localhost:5000/images/uploads/${deceased.images[1]}`}
-                alt=""
-              />
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* tributes */}
       <section id="tributes">
         <div className="max-w-6xl px-5 mx-auto mt-12 text-center">
@@ -150,9 +108,10 @@ const Home = ({ tributes, deceased }) => {
         tribute={tribute}
         heading={heading}
         closeModal={closePopup}
+        image={image}
       ></Modal>
     </>
   );
 };
 
-export default Home;
+export default Dashboard;

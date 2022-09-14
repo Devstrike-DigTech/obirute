@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-const mainLayout = ({ children }) => {
+const MainLayout = ({ children }) => {
   const location = window.location.pathname;
+  const [hamburger, setHamburger] = useState(false);
+
+  const handleNav = () => setHamburger(!hamburger);
   return (
     <div className="grid">
       <nav className="bg-white shadow-lg">
@@ -39,14 +42,17 @@ const mainLayout = ({ children }) => {
             </div>
 
             <div className="md:hidden flex items-center">
-              <button className="outline-none menu-button">
+              <button
+                className="outline-none menu-button"
+                onClick={() => handleNav()}
+              >
                 <svg
                   className="w-6 h-6 text-gray-500"
                   x-show="! showMenu"
                   fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   viewBox="0 00 24 24"
                   stroke="currentColor"
                 >
@@ -54,44 +60,34 @@ const mainLayout = ({ children }) => {
                 </svg>
               </button>
             </div>
-
-            <div className="hidden mobile-menu">
-              <ul className="">
-                <li className="active">
-                  <a
-                    href="/"
-                    className="block text-sm px-2 py-4 text-white bg-purple-500 font-semibold"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#services"
-                    className="block.text-sm.px-2.py-4 hover:bg-purple-500 transition duration-300"
-                  >
-                    Services
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#About"
-                    className="block.text-sm.px-2.py-4 hover:bg-purple-500 transition duration-300"
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#Contact Us"
-                    className="block.text-sm.px-2.py-4 hover:bg-purple-500 transition duration-300"
-                  >
-                    Contact Us
-                  </a>
-                </li>
-              </ul>
-            </div>
           </div>
+
+          <ul className={hamburger === false ? 'hidden' : 'text-sm mt-6 block'}>
+            <li className="active">
+              <a
+                href="/"
+                className={
+                  location === '/'
+                    ? 'block text-sm px-2 py-4 text-white bg-purple-500 font-semibold'
+                    : 'block text-sm.px-2.py-4 hover:bg-purple-500 hover:text-white transition duration-300'
+                }
+              >
+                Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="/write"
+                className={
+                  location === '/write'
+                    ? 'block text-sm px-2 py-4 text-white bg-purple-500 font-semibold'
+                    : 'block text-sm.px-2.py-4 hover:bg-purple-500 hover:text-white transition duration-300'
+                }
+              >
+                Write Tribute
+              </a>
+            </li>
+          </ul>
         </div>
       </nav>
       <main>
@@ -103,7 +99,7 @@ const mainLayout = ({ children }) => {
             <div className="md:flex md:-mx-4 md:items-center">
               <div className="md:flex-1 md:px-4 text-center md:text-left">
                 <p className="text-white">
-                  &copy; <strong>Memento Mori</strong>
+                  &copy; <strong>Devstrike</strong>
                 </p>
               </div>
               <div className="md:flex-1 md:px-4 text-center md:text-right">
@@ -111,13 +107,13 @@ const mainLayout = ({ children }) => {
                   href="#/"
                   className="py-2 px-4 text-white inline-block hover:underline"
                 >
-                  Terms of Service
+                  Home
                 </a>
                 <a
                   href="#/"
                   className="py-2 px-4 text-white inline-block hover:underline"
                 >
-                  Privacy Policy
+                  Write tribute
                 </a>
               </div>
             </div>
@@ -128,4 +124,4 @@ const mainLayout = ({ children }) => {
   );
 };
 
-export default mainLayout;
+export default MainLayout;

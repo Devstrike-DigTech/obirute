@@ -2,7 +2,7 @@ import React from 'react';
 import { useState, Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
-const Index = ({ dialog, closeModal, heading, tribute, name }) => {
+const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
   let [isOpen, setIsOpen] = useState(false);
 
   // function closeModal() {
@@ -38,64 +38,88 @@ const Index = ({ dialog, closeModal, heading, tribute, name }) => {
                   <Dialog.Title className="text-4xl leading-relaxed text-gray-600 justify-between p-5 border-b border-solid border-slate-200 rounded-t">
                     {heading}
                     <div className="text-sm block"> by {name}</div>
+                    {image && (
+                      <div className="text-sm block">
+                        download letter head/image{' '}
+                        <a
+                          href={`http://localhost:5000/images/uploads/${image}`}
+                          download={image}
+                          target="__blank"
+                          className="text-white p-2 bg-darkBlue rounded-md"
+                        >
+                          download
+                        </a>
+                      </div>
+                    )}
                   </Dialog.Title>
 
                   <div className="relative p-6 flex-auto">
-                    {tribute}
-                    {/* <p className="my-4 text-slate-500 text-md leading-relaxed">
-                      feugiat magna. Nam ac nibh libero. In eget venenatis ex.
-                      Vestibulum lacinia felis eget sem cursus, eu egestas nisi
-                      gravida. Vivamus a diam nisi. Fusce aliquam velit non est
-                      vulputate rutrum vel nec justo. Phasellus vitae est id
-                      felis congue pharetra vitae vel enim. Etiam vulputate sit
-                      amet lacus venenatis aliquam. Nam dignissim ex non eros
-                      scelerisque tempor. Donec eget quam sed justo faucibus.
-                    </p>
-                    <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                      feugiat magna. Nam ac nibh libero. In eget venenatis ex.
-                      Vestibulum lacinia felis eget sem cursus, eu egestas nisi
-                      gravida. Vivamus a diam nisi. Fusce aliquam velit non est
-                      vulputate rutrum vel nec justo. Phasellus vitae est id
-                      felis congue pharetra vitae vel enim. Etiam vulputate sit
-                      amet lacus venenatis aliquam. Nam dignissim ex non eros
-                      scelerisque tempor. Donec eget quam sed justo faucibus.
-                    </p>
-                    <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                      feugiat magna. Nam ac nibh libero. In eget venenatis ex.
-                      Vestibulum lacinia felis eget sem cursus, eu egestas nisi
-                      gravida. Vivamus a diam nisi. Fusce aliquam velit non est
-                      vulputate rutrum vel nec justo. Phasellus vitae est id
-                      felis congue pharetra vitae vel enim. Etiam vulputate sit
-                      amet lacus venenatis aliquam. Nam dignissim ex non eros
-                      scelerisque tempor. Donec eget quam sed justo faucibus.
-                    </p>
-                    <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                      feugiat magna. Nam ac nibh libero. In eget venenatis ex.
-                      Vestibulum lacinia felis eget sem cursus, eu egestas nisi
-                      gravida. Vivamus a diam nisi. Fusce aliquam velit non est
-                      vulputate rutrum vel nec justo. Phasellus vitae est id
-                      felis congue pharetra vitae vel enim. Etiam vulputate sit
-                      amet lacus venenatis aliquam. Nam dignissim ex non eros
-                      scelerisque tempor. Donec eget quam sed justo faucibus.
-                    </p>
-                    <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                      feugiat magna. Nam ac nibh libero. In eget venenatis ex.
-                      Vestibulum lacinia felis eget sem cursus, eu egestas nisi
-                      gravida. Vivamus a diam nisi. Fusce aliquam velit non est
-                      vulputate rutrum vel nec justo. Phasellus vitae est id
-                      felis congue pharetra vitae vel enim. Etiam vulputate sit
-                      amet lacus venenatis aliquam. Nam dignissim ex non eros
-                      scelerisque tempor. Donec eget quam sed justo faucibus.
-                    </p>
-                    <p className="my-4 text-slate-500 text-lg leading-relaxed">
-                      feugiat magna. Nam ac nibh libero. In eget venenatis ex.
-                      Vestibulum lacinia felis eget sem cursus, eu egestas nisi
-                      gravida. Vivamus a diam nisi. Fusce aliquam velit non est
-                      vulputate rutrum vel nec justo. Phasellus vitae est id
-                      felis congue pharetra vitae vel enim. Etiam vulputate sit
-                      amet lacus venenatis aliquam. Nam dignissim ex non eros
-                      scelerisque tempor. Donec eget quam sed justo faucibus.
-                    </p> */}
+                    {tribute ? (
+                      <>
+                        <p className="my-4 text-slate-500 text-md leading-relaxed">
+                          {tribute}
+                        </p>
+                      </>
+                    ) : (
+                      <>
+                        <p className="my-4 text-slate-500 text-md leading-relaxed">
+                          ﻿Mrs Victoria Chinedu Uzor (nee Iroegbu) was born in
+                          the early 60’s, 1st of April, into the family of Late
+                          Nze B.N.C. Iroegbu and Late Ezinne Veronica Iroegbu in
+                          Umuarighi, Umuezeala-Ama, Ehime-Mbano L.G.A. Imo
+                          State.
+                        </p>
+                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                          She started her early schooling in Central School
+                          Ntalakwu, in the present-day Abia State, had her
+                          secondary education at the Girls’ Secondary School,
+                          Emekuku, Owerri, Imo State and was admitted into the
+                          then Fatima Teachers’ Training College (TTC) Nsu in
+                          present-day Ehime-Mbano L.G.A. in Imo State.
+                        </p>
+                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                          She got married to her loving husband, Mr Uzor
+                          PaulKevin Onyekachi on November 11, 1990, a blessed
+                          union that birthed four children. From 1992 - 2003,
+                          she taught in Mary Hill Convent School, Iwo road,
+                          Ibadan. Victoria U, as she was fondly called while in
+                          Mary Hill Convent School, exhibited her athletic
+                          skills by obtaining a myriad of awards and
+                          certificates for both Mothers’ and Female Staff races
+                          and participating in extracurricular activities like
+                          dance and drama.
+                        </p>
+                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                          To further her formal education, she gained admission
+                          into The Polytechnic, Ibadan where she obtained her
+                          N.C.E certificate, specialising in Mathematics
+                          Education, in 1995. While being actively involved in
+                          family, work and church activities, Mrs Vicky Uzor
+                          went on to obtain a B.Ed in Guidance/Counselling from
+                          the University of Ado-Ekiti, Ekiti State, Nigeria in
+                          2001.
+                        </p>
+                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                          She later joined her husband when work had him posted
+                          to Enugu, and got her first teaching appointment with
+                          Pine Crest Schools, after which she went on to Martina
+                          Egbunike Early Learning Trust—now Hill View Nursery/
+                          Primary Schools. While in that school, she got another
+                          appointment at Spring of Life International Schools
+                          (SOLIS), Enugu where she retired on health grounds as
+                          the Vice Principal of the Primary school
+                        </p>
+                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                          A devoted wife, hallmark of motherhood, friend indeed,
+                          beacon of faith, epitome of goodness; Mrs Victoria
+                          Uzor forever remains in our hearts and her legacy will
+                          never fade away.
+                        </p>
+                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                          May her soul rest in perfect peace. Amen.
+                        </p>
+                      </>
+                    )}
                   </div>
                   <div className="flex items-center justify-end border-t border-solid border-slate-200 rounded-b">
                     <button
