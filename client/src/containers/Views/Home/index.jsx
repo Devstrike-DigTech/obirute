@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import './index.css';
 import ReactPaginate from 'react-paginate';
 import Modal from '../../../components/Modal/index';
-import { useNavigate, useLocation } from 'react-router-dom';
 
 const Home = ({ tributes, deceased }) => {
   const [currentItems, setCurrentItems] = useState([]);
@@ -12,9 +11,6 @@ const Home = ({ tributes, deceased }) => {
   const [dialog, setDialog] = useState(false);
   const itemsPerPage = 12;
 
-  const navigate = useNavigate();
-  const location = useLocation();
-
   //dialog props
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
@@ -22,15 +18,8 @@ const Home = ({ tributes, deceased }) => {
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(tributes.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(tributes.length / itemsPerPage));
-    console.log(pageCount);
-
-    // if (location.search) {
-    //   const newPage = location.search.split('?');
-    //   setPageCount(newPage[1]);
-    // }
   }, [itemOffset, itemsPerPage, tributes]);
 
   const handlePageClick = (event) => {
@@ -111,7 +100,7 @@ const Home = ({ tributes, deceased }) => {
                 >
                   <h5 className="text-lg font-bold text-gray-600">{e.name}</h5>
                   <p className="text-sm text-darkGrayishBlue leading-relaxed">
-                    {e.tribute}
+                    {`${e.tribute.substring(0, 25)}`}
                   </p>
                   <div className="text-center">
                     <button
