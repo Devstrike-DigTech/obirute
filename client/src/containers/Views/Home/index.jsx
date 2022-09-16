@@ -57,7 +57,10 @@ const Home = ({ tributes, deceased }) => {
             >
               Biography
             </p>
-            <p className="text-4xl font-bold md:text-7xl" data-aos="fade-in">
+            <p
+              className="text-4xl font-bold md:text-7xl text-center"
+              data-aos="fade-in"
+            >
               Mrs Victoria Chinedu Uzor
             </p>
             <p className="mt-2 text-sm md:text-lg">1961 - 2022</p>
