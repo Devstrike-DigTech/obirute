@@ -191,7 +191,7 @@ const Router = () => {
             />
             <Route path="/write" element={<Write />} />
             <Route
-              path="/dashboard"
+              path="/dashboard/589b6423364a2dfbc7a4b6eda470e10138e198d2644f6f0cb082133499f53bbd"
               element={<Dashboard tributes={tributes} />}
             />
           </Route>

@@ -58,9 +58,9 @@ const Home = ({ tributes, deceased }) => {
               Biography
             </p>
             <p className="text-4xl font-bold md:text-7xl" data-aos="fade-in">
-              Mrs Nk Uzor
+              Mrs Victoria Chinedu Uzor
             </p>
-            <p className="mt-2 text-sm md:text-lg">1956 - 2022</p>
+            <p className="mt-2 text-sm md:text-lg">1961 - 2022</p>
             <button
               className="text-lg md:text-2xl bg-black text-white py-2 px-5 mt-10 hover:bg-zinc-800"
               onClick={() => openPopup('main')}
@@ -87,7 +87,7 @@ const Home = ({ tributes, deceased }) => {
             className="text-4xl font-bold text-center text-gray-600"
             data-aos="fade-in"
           >
-            Tributes to Mama
+            Tributes to Mummy
           </h2>
 
           {tributes && (
