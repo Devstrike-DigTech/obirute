@@ -99,7 +99,10 @@ const MainLayout = ({ children }) => {
             <div className="md:flex md:-mx-4 md:items-center">
               <div className="md:flex-1 md:px-4 text-center md:text-left">
                 <p className="text-white">
-                  &copy; <strong>Devstrike</strong>
+                  &copy;{' '}
+                  <strong>
+                    <a href="mailto: devstrike.digtech@gmail.com">Devstrike</a>
+                  </strong>
                 </p>
               </div>
               <div className="md:flex-1 md:px-4 text-center md:text-right">
@@ -114,6 +117,12 @@ const MainLayout = ({ children }) => {
                   className="py-2 px-4 text-white inline-block hover:underline"
                 >
                   Write tribute
+                </a>
+                <a
+                  href="mailto: devstrike.digtech@gmail.com?subject=Service request"
+                  className="py-2 px-4 text-white inline-block hover:underline"
+                >
+                  Contact us
                 </a>
               </div>
             </div>

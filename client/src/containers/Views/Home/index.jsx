@@ -14,7 +14,7 @@ const Home = ({ tributes, deceased }) => {
   //dialog props
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
-  const [tribute, setTribute] = useState('peoples Tribute');
+  const [tribute, setTribute] = useState('');
 
   useEffect(() => {
     const endOffset = itemOffset + itemsPerPage;
@@ -36,8 +36,8 @@ const Home = ({ tributes, deceased }) => {
   const openPopup = (val) => {
     if (val === 'main') {
       setName('Family');
-      setHeading('Tribute to Mama');
-      setTribute(deceased.bio);
+      setHeading('Tribute to Mummy');
+      setTribute('');
     } else {
       setHeading(currentItems[val].heading);
       setTribute(currentItems[val].tribute);
@@ -75,7 +75,7 @@ const Home = ({ tributes, deceased }) => {
             {deceased.images && (
               <img
                 className="h-80 w-80 object-cover lg:w-[500px] lg:h-[500px]"
-                src={`http://localhost:5000/images/uploads/${deceased.images[1]}`}
+                src={`./image_1663342060197.jpg`}
                 alt=""
               />
             )}
