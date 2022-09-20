@@ -59,11 +59,13 @@ const Home = ({ tributes, deceased }) => {
             </p>
             <p
               className="text-4xl font-bold md:text-7xl text-center"
-              data-aos="fade-in"
+              data-aos="fade-up"
             >
               Mrs Victoria Chinedu Uzor
             </p>
-            <p className="mt-2 text-sm md:text-lg">1961 - 2022</p>
+            <p className="mt-2 text-sm md:text-lg" data-aos="fade-up">
+              1961 - 2022
+            </p>
             <button
               className="text-lg md:text-2xl bg-black text-white py-2 px-5 mt-10 hover:bg-zinc-800"
               onClick={() => openPopup('main')}
@@ -72,13 +74,11 @@ const Home = ({ tributes, deceased }) => {
             </button>
           </div>
           <div className="order-1 lg:order-2">
-            {deceased.images && (
-              <img
-                className="h-80 w-80 object-cover lg:w-[500px] lg:h-[500px]"
-                src={`./image_1663342060197.jpg`}
-                alt=""
-              />
-            )}
+            <img
+              className="h-80 w-80 object-cover lg:w-[500px] lg:h-[500px]"
+              src={`./image_1663342060197.jpg`}
+              alt=""
+            />
           </div>
         </div>
       </section>

@@ -69,7 +69,7 @@ const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
                           Umuarighi, Umuezeala-Ama, Ehime-Mbano L.G.A. Imo
                           State.
                         </p>
-                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                        <p className="my-4 text-slate-500 text-md leading-relaxed">
                           She started her early schooling in Central School
                           Ntalakwu, in the present-day Abia State, had her
                           secondary education at the Girls’ Secondary School,
@@ -77,7 +77,7 @@ const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
                           then Fatima Teachers’ Training College (TTC) Nsu in
                           present-day Ehime-Mbano L.G.A. in Imo State.
                         </p>
-                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                        <p className="my-4 text-slate-500 text-md leading-relaxed">
                           She got married to her loving husband, Mr Uzor
                           PaulKevin Onyekachi on November 11, 1990, a blessed
                           union that birthed four children. From 1992 - 2003,
@@ -89,7 +89,7 @@ const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
                           and participating in extracurricular activities like
                           dance and drama.
                         </p>
-                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                        <p className="my-4 text-slate-500 text-md leading-relaxed">
                           To further her formal education, she gained admission
                           into The Polytechnic, Ibadan where she obtained her
                           N.C.E certificate, specialising in Mathematics
@@ -99,7 +99,7 @@ const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
                           the University of Ado-Ekiti, Ekiti State, Nigeria in
                           2001.
                         </p>
-                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                        <p className="my-4 text-slate-500 text-md leading-relaxed">
                           She later joined her husband when work had him posted
                           to Enugu, and got her first teaching appointment with
                           Pine Crest Schools, after which she went on to Martina
@@ -109,13 +109,13 @@ const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
                           (SOLIS), Enugu where she retired on health grounds as
                           the Vice Principal of the Primary school
                         </p>
-                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                        <p className="my-4 text-slate-500 text-md leading-relaxed">
                           A devoted wife, hallmark of motherhood, friend indeed,
                           beacon of faith, epitome of goodness; Mrs Victoria
                           Uzor forever remains in our hearts and her legacy will
                           never fade away.
                         </p>
-                        <p className="my-4 text-slate-500 text-lg leading-relaxed">
+                        <p className="my-4 text-slate-500 text-md leading-relaxed">
                           May her soul rest in perfect peace. Amen.
                         </p>
                       </>

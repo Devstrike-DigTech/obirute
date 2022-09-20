@@ -12,6 +12,13 @@ const MainLayout = ({ children }) => {
           <div className="flex justify-between">
             <div className="flex space-x-7">
               <a href="/" className="flex items-center py-4 px-2">
+                <span>
+                  <img
+                    src="./favicon.ico"
+                    alt=""
+                    className="object-cover w-fit h-10"
+                  />
+                </span>
                 <span className="font-semibold text-gray-500 text-lg">
                   Memento Mori
                 </span>
@@ -98,12 +105,28 @@ const MainLayout = ({ children }) => {
           <div className="container px-4 mx-auto">
             <div className="md:flex md:-mx-4 md:items-center">
               <div className="md:flex-1 md:px-4 text-center md:text-left">
-                <p className="text-white">
-                  &copy;{' '}
-                  <strong>
-                    <a href="mailto: devstrike.digtech@gmail.com">Devstrike</a>
-                  </strong>
-                </p>
+                <div className="flex justify-between text-white">
+                  <div className="flex space-x-7">
+                    <a
+                      href="mailto: devstrike.digtech@gmail.com?subject=Service request"
+                      className="flex items-center py-4 px-2"
+                    >
+                      <span className="font-light text-lg">
+                        &copy; 2022 <span className="italic">Designed by</span>
+                      </span>
+                      <span>
+                        <img
+                          src="./devstrike3.png"
+                          alt=""
+                          className="object-cover w-fit h-10"
+                        />
+                      </span>
+                      <span className="font-semibold text-lg cursor-pointer">
+                        Devstrike
+                      </span>
+                    </a>
+                  </div>
+                </div>
               </div>
               <div className="md:flex-1 md:px-4 text-center md:text-right">
                 <a
@@ -113,7 +136,7 @@ const MainLayout = ({ children }) => {
                   Home
                 </a>
                 <a
-                  href="#/"
+                  href="/write"
                   className="py-2 px-4 text-white inline-block hover:underline"
                 >
                   Write tribute

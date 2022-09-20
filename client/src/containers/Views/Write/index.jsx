@@ -26,7 +26,7 @@ const Write = () => {
     setTributeError('');
     if (!name) return setNameError('Name is required.');
     if (!relationship) {
-      return setRelationshipError('Relationship to mama should be stated.');
+      return setRelationshipError('Relationship to mummy should be stated.');
     }
     if (!tribute) return setTributeError('tribute is required.');
     if (!heading) return setHeadingError('heading is required.');
@@ -99,7 +99,7 @@ const Write = () => {
                   }
                   id="grid-first-name"
                   type="text"
-                  placeholder="Jane"
+                  placeholder="Full name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                 />
@@ -182,7 +182,7 @@ const Write = () => {
                     : 'py-3 px-4 block w-full bg-gray-200 border-red-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400'
                 }
                 rows="9"
-                placeholder="This is a textarea placeholder"
+                placeholder="Enter Tribute here(less than 300 words)"
                 value={tribute}
                 onChange={(e) => tributeChange(e)}
               ></textarea>
