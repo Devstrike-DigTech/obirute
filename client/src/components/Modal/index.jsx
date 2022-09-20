@@ -1,10 +1,10 @@
 import React from 'react';
-import { useState, Fragment } from 'react';
+import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 
 const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
   let [isOpen, setIsOpen] = useState(false);
-
+  let completeButtonRef = useRef(null);
   // function closeModal() {
   //   setIsOpen(false);
   // }
@@ -20,6 +20,7 @@ const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
           open={dialog}
           onClose={() => setIsOpen(false)}
           className="relative z-50"
+          initialFocus={completeButtonRef}
         >
           <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
 
@@ -35,7 +36,10 @@ const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="mx-auto rounded bg-white max-w-3xl">
-                  <Dialog.Title className="text-4xl leading-relaxed text-gray-600 justify-between p-5 border-b border-solid border-slate-200 rounded-t">
+                  <Dialog.Title
+                    ref={completeButtonRef}
+                    className="text-4xl leading-relaxed text-gray-600 justify-between p-5 border-b border-solid border-slate-200 rounded-t"
+                  >
                     {heading}
                     <div className="text-sm block"> by {name}</div>
                     {image && (
