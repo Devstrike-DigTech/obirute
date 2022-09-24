@@ -5,11 +5,11 @@ import ReactPaginate from 'react-paginate';
 import Modal from '../../../components/Modal/index';
 
 const Home = ({ tributes, deceased }) => {
-  const [currentItems, setCurrentItems] = useState([]);
-  const [pageCount, setPageCount] = useState(0);
+  const [itemsOnCurrentPage, setItemsOnCurrentPage] = useState([]);
+  const [numberOfPages, setNumberOfPages] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
   const [dialog, setDialog] = useState(false);
-  const itemsPerPage = 12;
+  const numOfItemsPerPage = 12;
 
   //dialog props
   const [name, setName] = useState('');
@@ -17,17 +17,26 @@ const Home = ({ tributes, deceased }) => {
   const [tribute, setTribute] = useState('');
 
   useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(tributes.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(tributes.length / itemsPerPage));
-  }, [itemOffset, itemsPerPage, tributes]);
+    const setPageVariables = () => {
+      const endOffset = itemOffset + numOfItemsPerPage;
+      setItemsOnCurrentPage(tributes.slice(itemOffset, endOffset));
+      setNumberOfPages(Math.ceil(tributes.length / numOfItemsPerPage));
+    };
+    setPageVariables();
+  }, [itemOffset, numOfItemsPerPage, tributes]);
 
   const handlePageClick = (event) => {
-    // navigate({ pathname: `/`, search: `${pageCount}` });
-    const newOffset = (event.selected * itemsPerPage) % tributes.length;
-    setItemOffset(newOffset);
+    setItemOffset(setPageItemsStartIndex(event.selected));
+    goToStartOfTributes();
+  };
+
+  const goToStartOfTributes = () => {
     var getMeTo = document.getElementById('tributes');
     getMeTo.scrollIntoView({ behavior: 'smooth' }, true);
+  };
+
+  const setPageItemsStartIndex = (paginationNumberClicked) => {
+    return (paginationNumberClicked * numOfItemsPerPage) % tributes.length;
   };
 
   const closePopup = () => {
@@ -39,9 +48,9 @@ const Home = ({ tributes, deceased }) => {
       setHeading('Tribute to Mummy');
       setTribute('');
     } else {
-      setHeading(currentItems[val].heading);
-      setTribute(currentItems[val].tribute);
-      setName(currentItems[val].name);
+      setHeading(itemsOnCurrentPage[val].heading);
+      setTribute(itemsOnCurrentPage[val].tribute);
+      setName(itemsOnCurrentPage[val].name);
     }
     setDialog(true);
   };
@@ -95,7 +104,7 @@ const Home = ({ tributes, deceased }) => {
 
           {tributes && (
             <div className="grid lg:grid-cols-3 md:grid-cols-2 mt-24 gap-10">
-              {currentItems.map((e, i) => (
+              {itemsOnCurrentPage.map((e, i) => (
                 <div
                   key={i}
                   className="items-center p-6 space-y-6 rounded-lg bg-neutral-100"
@@ -125,7 +134,7 @@ const Home = ({ tributes, deceased }) => {
         nextLabel=">>"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
-        pageCount={pageCount}
+        pageCount={numberOfPages}
         previousLabel="<<"
         renderOnZeroPageCount={null}
         containerClassName="pagination"

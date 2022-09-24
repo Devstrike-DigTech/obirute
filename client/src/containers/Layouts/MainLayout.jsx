@@ -1,8 +1,23 @@
 import React, { useState } from 'react';
 import { Outlet } from 'react-router-dom';
-const MainLayout = ({ children }) => {
+const MainLayout = ({ children, emitSearchValue }) => {
   const location = window.location.pathname;
   const [hamburger, setHamburger] = useState(false);
+  const [search, setSearchValue] = useState('');
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    emitSearchValue(search);
+  };
+
+  const setMe = (e) => {
+    console.log(e.target.value, 'event');
+    const me = e.target.value;
+    setSearchValue(me);
+    console.log(me, 'me');
+    console.log(search, 'search');
+    submitSearch(e);
+  };
 
   const handleNav = () => setHamburger(!hamburger);
   return (
@@ -46,6 +61,26 @@ const MainLayout = ({ children }) => {
               >
                 Write Tribute
               </a>
+              <form onSubmit={submitSearch}>
+                <div className="relative text-gray-600 focus-within:text-gray-400">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+                    <button
+                      type="submit"
+                      className="p-1 focus:outline-none focus:shadow-outline"
+                    >
+                      <i className="fa fa-search"></i>
+                    </button>
+                  </span>
+                  <input
+                    type="search"
+                    value={search}
+                    onChange={(e) => setMe(e)}
+                    className="py-2 text-sm text-white bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+                    placeholder="Search..."
+                    autoComplete="off"
+                  />
+                </div>
+              </form>
             </div>
 
             <div className="md:hidden flex items-center">
@@ -93,6 +128,25 @@ const MainLayout = ({ children }) => {
               >
                 Write Tribute
               </a>
+            </li>
+            <li>
+              <form action="">
+                <div className="relative text-gray-600 focus-within:text-gray-400">
+                  <span className="absolute inset-y-0 left-0 flex items-center pl-2">
+                    <button
+                      type="submit"
+                      className="p-1 focus:outline-none focus:shadow-outline"
+                    >
+                      <i className="fa fa-search"></i>
+                    </button>
+                  </span>
+                  <input
+                    type="search"
+                    name="name"
+                    className="py-2 text-sm text-white bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+                  />
+                </div>
+              </form>
             </li>
           </ul>
         </div>
