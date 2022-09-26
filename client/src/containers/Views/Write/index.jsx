@@ -111,17 +111,19 @@ const Write = () => {
                 </label>
                 <input
                   className={
-                    headingError
+                    relationshipError
                       ? 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                       : 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                   }
                   id="grid-last-name"
                   type="text"
                   placeholder="Friend"
-                  value={heading}
-                  onChange={(e) => setHeading(e.target.value)}
+                  value={relationship}
+                  onChange={(e) => setRelationship(e.target.value)}
                 />
-                <p className="text-red-500 text-xs italic">{headingError}</p>
+                <p className="text-red-500 text-xs italic">
+                  {relationshipError}
+                </p>
               </div>
             </div>
             <div className="flex flex-wrap -mx-3 mb-6">
@@ -157,17 +159,17 @@ const Write = () => {
               </label>
               <input
                 className={
-                  relationshipError
+                  headingError
                     ? 'appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                     : 'appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white'
                 }
                 id="grid-last-name"
                 type="text"
                 placeholder="Tribute to my beloved"
-                value={relationship}
-                onChange={(e) => setRelationship(e.target.value)}
+                value={heading}
+                onChange={(e) => setHeading(e.target.value)}
               />
-              <p className="text-red-500 text-xs italic">{relationshipError}</p>
+              <p className="text-red-500 text-xs italic">{headingError}</p>
             </div>
             <div>
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
@@ -187,12 +189,18 @@ const Write = () => {
                 onChange={(e) => tributeChange(e)}
               ></textarea>
             </div>
+            <div className="p-3">
+              <i className="fa fa-info-circle text-yellow-500 p-2"></i>
+              <span className="text-gray-500">
+                Please preview your Tribute before you submit.
+              </span>
+            </div>
             <div className="text-center pt-8">
               <button
                 className="rounded-sm p-1 px-6 baseline hover:bg-brightRedLight hover:text-darkBlue text-white bg-green-600"
                 type="submit"
               >
-                Save
+                Submit
               </button>
             </div>
           </form>

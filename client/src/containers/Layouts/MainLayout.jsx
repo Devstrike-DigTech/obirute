@@ -11,11 +11,7 @@ const MainLayout = ({ children, emitSearchValue }) => {
   };
 
   const setMe = (e) => {
-    console.log(e.target.value, 'event');
-    const me = e.target.value;
-    setSearchValue(me);
-    console.log(me, 'me');
-    console.log(search, 'search');
+    setSearchValue(e.target.value);
     submitSearch(e);
   };
 
@@ -130,7 +126,7 @@ const MainLayout = ({ children, emitSearchValue }) => {
               </a>
             </li>
             <li>
-              <form action="">
+              <form onSubmit={submitSearch}>
                 <div className="relative text-gray-600 focus-within:text-gray-400">
                   <span className="absolute inset-y-0 left-0 flex items-center pl-2">
                     <button
@@ -142,8 +138,11 @@ const MainLayout = ({ children, emitSearchValue }) => {
                   </span>
                   <input
                     type="search"
-                    name="name"
+                    value={search}
+                    onChange={(e) => setMe(e)}
                     className="py-2 text-sm text-white bg-gray-900 rounded-md pl-10 focus:outline-none focus:bg-white focus:text-gray-900"
+                    placeholder="Search..."
+                    autoComplete="off"
                   />
                 </div>
               </form>

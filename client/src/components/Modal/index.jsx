@@ -1,8 +1,18 @@
 import React from 'react';
 import { useState, Fragment, useRef } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
+import { toast } from 'react-toastify';
 
-const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
+const Index = ({
+  dialog,
+  closeModal,
+  heading,
+  tribute,
+  name,
+  image,
+  isAdmin,
+  relationship,
+}) => {
   let [isOpen, setIsOpen] = useState(false);
   let completeButtonRef = useRef(null);
   // function closeModal() {
@@ -11,6 +21,20 @@ const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  function copyToClipboard(text) {
+    // window.clipboardData.setData(text);
+    navigator.clipboard.writeText(text);
+    toast.success('Copied to Clipboard!', {
+      position: 'top-right',
+      autoClose: 2000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      className: {
+        background: '#00FF00 !important',
+      },
+    });
   }
 
   return (
@@ -53,6 +77,20 @@ const Index = ({ dialog, closeModal, heading, tribute, name, image }) => {
                         >
                           download
                         </a>
+                      </div>
+                    )}
+                    {isAdmin && (
+                      <div className="text-sm block">
+                        <button
+                          className="text-white p-2 bg-darkBlue rounded-md"
+                          onClick={() =>
+                            copyToClipboard(
+                              `${heading}.\n${tribute}.\n${name}\n${relationship}`
+                            )
+                          }
+                        >
+                          Copy
+                        </button>
                       </div>
                     )}
                   </Dialog.Title>

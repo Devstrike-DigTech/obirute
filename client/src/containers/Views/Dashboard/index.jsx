@@ -15,6 +15,7 @@ const Dashboard = ({ tributes }) => {
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
   const [tribute, setTribute] = useState('peoples Tribute');
+  const [relationship, setRelationship] = useState('');
   const [image, setImage] = useState('');
 
   useEffect(() => {
@@ -44,6 +45,7 @@ const Dashboard = ({ tributes }) => {
     setTribute(currentItems[val].tribute);
     setName(currentItems[val].name);
     setImage(currentItems[val].image);
+    setRelationship(currentItems[val].relationship);
     setDialog(true);
   };
 
@@ -109,6 +111,8 @@ const Dashboard = ({ tributes }) => {
         heading={heading}
         closeModal={closePopup}
         image={image}
+        isAdmin={'yes'}
+        relationship={relationship}
       ></Modal>
     </>
   );
