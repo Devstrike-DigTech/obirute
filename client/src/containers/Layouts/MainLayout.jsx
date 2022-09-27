@@ -25,7 +25,7 @@ const MainLayout = ({ children, emitSearchValue }) => {
               <a href="/" className="flex items-center py-4 px-2">
                 <span>
                   <img
-                    src="./favicon.ico"
+                    src="favicon.ico"
                     alt=""
                     className="object-cover w-fit h-10"
                   />

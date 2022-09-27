@@ -15,6 +15,7 @@ const Home = ({ tributes, deceased }) => {
   const [name, setName] = useState('');
   const [heading, setHeading] = useState('');
   const [tribute, setTribute] = useState('');
+  const [relationship, setRelationship] = useState('');
 
   useEffect(() => {
     const setPageVariables = () => {
@@ -44,13 +45,15 @@ const Home = ({ tributes, deceased }) => {
   };
   const openPopup = (val) => {
     if (val === 'main') {
-      setName('Family');
+      setName('');
       setHeading('Tribute to Mummy');
       setTribute('');
+      setRelationship('');
     } else {
       setHeading(itemsOnCurrentPage[val].heading);
       setTribute(itemsOnCurrentPage[val].tribute);
       setName(itemsOnCurrentPage[val].name);
+      setRelationship(itemsOnCurrentPage[val].relationship);
     }
     setDialog(true);
   };
@@ -112,7 +115,7 @@ const Home = ({ tributes, deceased }) => {
                 >
                   <h5 className="text-lg font-bold text-gray-600">{e.name}</h5>
                   <p className="text-sm text-darkGrayishBlue leading-relaxed">
-                    {`${e.tribute.substring(0, 25)}`}
+                    {`${e.tribute.replace(/<[^>]*>?/gm, '').substring(0, 25)}`}
                   </p>
                   <div className="text-center">
                     <button
@@ -150,6 +153,7 @@ const Home = ({ tributes, deceased }) => {
         name={name}
         tribute={tribute}
         heading={heading}
+        relationship={relationship}
         closeModal={closePopup}
       ></Modal>
     </>

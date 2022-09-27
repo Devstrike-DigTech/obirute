@@ -23,6 +23,10 @@ const Index = ({
     setIsOpen(true);
   }
 
+  function createMarkup() {
+    return { __html: tribute };
+  }
+
   function copyToClipboard(text) {
     // window.clipboardData.setData(text);
     navigator.clipboard.writeText(text);
@@ -65,7 +69,8 @@ const Index = ({
                     className="text-4xl leading-relaxed text-gray-600 justify-between p-5 border-b border-solid border-slate-200 rounded-t"
                   >
                     {heading}
-                    <div className="text-sm block"> by {name}</div>
+                    <div className="block text-2xl font-bold">{name}</div>
+                    <div className="text-sm block italic">{relationship}</div>
                     {image && (
                       <div className="text-sm block">
                         download letter head/image{' '}
@@ -98,9 +103,14 @@ const Index = ({
                   <div className="relative p-6 flex-auto">
                     {tribute ? (
                       <>
-                        <p className="my-4 text-slate-500 text-md leading-relaxed">
+                        {/* <p className="my-4 text-slate-500 text-md leading-relaxed">
                           {tribute}
-                        </p>
+
+                        </p> */}
+                        <div
+                          className="my-4 text-slate-500 text-md leading-relaxed"
+                          dangerouslySetInnerHTML={createMarkup()}
+                        ></div>
                       </>
                     ) : (
                       <>

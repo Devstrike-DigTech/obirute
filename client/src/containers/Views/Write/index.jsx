@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { DefaultEditor } from 'react-simple-wysiwyg';
 
 const Write = () => {
   const [name, setName] = useState('');
@@ -28,8 +29,11 @@ const Write = () => {
     if (!relationship) {
       return setRelationshipError('Relationship to mummy should be stated.');
     }
-    if (!tribute) return setTributeError('tribute is required.');
     if (!heading) return setHeadingError('heading is required.');
+    if (!tribute) return setTributeError('tribute is required.');
+    if (countWords(tribute).length > 300) {
+      return setTributeError('Tribute cannot be more than 300 words');
+    }
 
     const formData = new FormData();
     formData.append('name', name);
@@ -77,8 +81,22 @@ const Write = () => {
     }
   };
 
+  const countWords = (text) => {
+    const newVal = text.replace(/<[^>]*>?/gm, '');
+    const array = newVal.split(' ');
+    return array;
+  };
   const tributeChange = (e) => {
+    // const newVal = e.target.value.replace(/<[^>]*>?/gm, '');
+    // const array = newVal.split(' ');
+    const array = countWords(e.target.value);
+    console.log(array);
     setTribute(e.target.value);
+    if (array.length > 300) {
+      setTributeError('Tribute cannot be more than 300 words');
+    } else {
+      setTributeError('');
+    }
   };
 
   return (
@@ -175,19 +193,8 @@ const Write = () => {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">
                 *Tribute
               </label>
+              <DefaultEditor value={tribute} onChange={tributeChange} />
               <p className="text-red-500 text-xs italic">{tributeError}</p>
-              <textarea
-                maxLength={700}
-                className={
-                  tributeError
-                    ? 'py-3 px-4 block w-full bg-gray-200 border-gray-200 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400'
-                    : 'py-3 px-4 block w-full bg-gray-200 border-red-500 rounded-md text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400'
-                }
-                rows="9"
-                placeholder="Enter Tribute here(less than 300 words)"
-                value={tribute}
-                onChange={(e) => tributeChange(e)}
-              ></textarea>
             </div>
             <div className="p-3">
               <i className="fa fa-info-circle text-yellow-500 p-2"></i>
