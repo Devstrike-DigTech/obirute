@@ -26,7 +26,7 @@
           <div className="md:w-1/2">
             {deceased.images && (
               <img
-                src={`http://localhost:5000/images/uploads/${deceased.images[1]}`}
+                src={`http://localhost:4000/images/uploads/${deceased.images[1]}`}
                 alt="Rest well mama"
                 className="h-full w-full object-contain"
               />

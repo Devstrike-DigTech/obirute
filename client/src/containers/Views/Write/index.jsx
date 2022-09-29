@@ -52,10 +52,9 @@ const Write = () => {
   const sendTribute = async (data) => {
     try {
       const res = await axios.post(
-        'http://localhost:5000/api/v1/tributes',
+        'http://localhost:4000/api/v1/tributes',
         data
       );
-      console.log(res);
       toast.success('Tribute submitted successfully!', {
         position: 'top-right',
         autoClose: 2000,
@@ -90,7 +89,6 @@ const Write = () => {
     // const newVal = e.target.value.replace(/<[^>]*>?/gm, '');
     // const array = newVal.split(' ');
     const array = countWords(e.target.value);
-    console.log(array);
     setTribute(e.target.value);
     if (array.length > 300) {
       setTributeError('Tribute cannot be more than 300 words');

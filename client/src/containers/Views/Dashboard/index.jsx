@@ -21,7 +21,7 @@ const Dashboard = ({ tributes }) => {
   useEffect(() => {
     // if (tributes > 0) {
     const endOffset = itemOffset + itemsPerPage;
-    console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+    // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
     setCurrentItems(tributes.slice(itemOffset, endOffset));
     setPageCount(Math.ceil(tributes.length / itemsPerPage));
     // }
@@ -29,9 +29,9 @@ const Dashboard = ({ tributes }) => {
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % tributes.length;
-    console.log(
-      `User requested page number ${event.selected}, which is offset ${newOffset}`
-    );
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
     setItemOffset(newOffset);
     var getMeTo = document.getElementById('tributes');
     getMeTo.scrollIntoView({ behavior: 'smooth' }, true);
