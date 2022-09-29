@@ -3,8 +3,10 @@ import { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { DefaultEditor } from 'react-simple-wysiwyg';
+import { useNavigate } from 'react-router-dom';
 
 const Write = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [relationship, setRelationship] = useState('');
   const [phone, setPhone] = useState('');
@@ -70,6 +72,7 @@ const Write = () => {
       setImage(null);
       setHeading('');
       setTribute('');
+      navigate('/');
     } catch (error) {
       toast.error('Error! Something went wrong', {
         position: 'top-right',
