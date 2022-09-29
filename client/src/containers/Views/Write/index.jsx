@@ -52,7 +52,7 @@ const Write = () => {
   const sendTribute = async (data) => {
     try {
       const res = await axios.post(
-        'http://localhost:4000/api/v1/tributes',
+        'https://tributetoourbeloved.site/api/v1/tributes',
         data
       );
       toast.success('Tribute submitted successfully!', {

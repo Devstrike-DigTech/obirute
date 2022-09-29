@@ -75,7 +75,7 @@ const Index = ({
                       <div className="text-sm block">
                         download letter head/image{' '}
                         <a
-                          href={`http://localhost:4000/images/uploads/${image}`}
+                          href={`https://tributetoourbeloved.site/images/uploads/${image}`}
                           download={image}
                           target="__blank"
                           className="text-white p-2 bg-darkBlue rounded-md"

@@ -19,19 +19,21 @@ const Router = () => {
   const [deceased, setDeceased] = useState([]);
   const [tributes, setTributes] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:4000/api/v1/deceased').then((res) => {
-      setDeceased(res.data.deceased[0]);
-    });
+    axios
+      .get('https://tributetoourbeloved.site/api/v1/deceased')
+      .then((res) => {
+        setDeceased(res.data.deceased[0]);
+      });
 
     fetchTribute().then((res) => setTributes(res.data.data.tributes));
-    //   axios.get('http://localhost:4000/api/v1/tributes').then((res) => {
+    //   axios.get('https://tributetoourbeloved.site/api/v1/tributes').then((res) => {
     //   setTributes(res.data.data.tributes);
     // });
   }, []);
 
   const fetchTribute = async () => {
     try {
-      const res = axios.get('http://localhost:4000/api/v1/tributes');
+      const res = axios.get('https://tributetoourbeloved.site/api/v1/tributes');
       return res;
     } catch (e) {
       console.log(e);
