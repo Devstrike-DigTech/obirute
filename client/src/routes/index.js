@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react';
  * import Layouts
  */
 import MainLayout from '../containers/Layouts/MainLayout';
-import AdminLayout from '../containers/Layouts/AdminLayout';
 // import UserLayout from "../containers/Layouts/UserLayout";
 /**
  * import views
@@ -34,6 +33,7 @@ const Router = () => {
   const fetchTribute = async () => {
     try {
       const res = axios.get('https://tributetoourbeloved.site/api/v1/tributes');
+      // const res = axios.get('http://localhost:5000/api/v1/tributes');
       return res;
     } catch (e) {
       console.log(e);

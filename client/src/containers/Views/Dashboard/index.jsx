@@ -1,8 +1,9 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-// import './index.css';
 import ReactPaginate from 'react-paginate';
 import Modal from '../../../components/Modal/index';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Dashboard = ({ tributes }) => {
   const [currentItems, setCurrentItems] = useState([]);
@@ -49,6 +50,31 @@ const Dashboard = ({ tributes }) => {
     setDialog(true);
   };
 
+  const deleteTribute = (id) => {
+    try {
+      axios.delete(`https://tributetoourbeloved.site/api/v1/tributes/${id}`);
+      // axios.delete(`http://localhost:5000/api/v1/tributes/${id}`);
+      toast.success('Tribute deleted successfully!', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        className: {
+          background: '#00FF00 !important',
+        },
+      });
+      window.location.reload();
+    } catch (e) {
+      console.log(e);
+      toast.error('Error! Something went wrong', {
+        position: 'top-right',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+      });
+    }
+  };
+
   return (
     <>
       {/* tributes */}
@@ -71,7 +97,7 @@ const Dashboard = ({ tributes }) => {
                 >
                   <h5 className="text-lg font-bold text-gray-600">{e.name}</h5>
                   <p className="text-sm text-darkGrayishBlue leading-relaxed">
-                    {e.tribute}
+                    {`${e.tribute.replace(/<[^>]*>?/gm, '').substring(0, 25)}`}
                   </p>
                   <div className="text-center">
                     <button
@@ -79,6 +105,14 @@ const Dashboard = ({ tributes }) => {
                       onClick={() => openPopup(i)}
                     >
                       Read more
+                    </button>
+                    <button
+                      className="p-2"
+                      onClick={() => {
+                        deleteTribute(e._id);
+                      }}
+                    >
+                      <i className="fa fa-trash"></i>
                     </button>
                   </div>
                 </div>
