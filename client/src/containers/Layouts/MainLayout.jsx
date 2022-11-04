@@ -57,6 +57,13 @@ const MainLayout = ({ children, emitSearchValue }) => {
               >
                 Write Tribute
               </a>
+              <a
+                href="Mrs_Uzor_Brochure.pdf"
+                target="_blank"
+                className="py-4 px-2 text-gray-500 border-purple-500 font-semibold"
+              >
+                Brochure
+              </a>
               <form onSubmit={submitSearch}>
                 <div className="relative text-gray-600 focus-within:text-gray-400">
                   <span className="absolute inset-y-0 left-0 flex items-center pl-2">
