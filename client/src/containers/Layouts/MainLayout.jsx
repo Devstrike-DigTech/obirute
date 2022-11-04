@@ -114,10 +114,19 @@ const MainLayout = ({ children, emitSearchValue }) => {
                 className={
                   location === '/'
                     ? 'block text-sm px-2 py-4 text-white bg-purple-500 font-semibold'
-                    : 'block text-sm.px-2.py-4 hover:bg-purple-500 hover:text-white transition duration-300'
+                    : 'block text-sm.px-2.py-4 hover:bg-purple-500 hover:text-white transition duration-300 font-semibold'
                 }
               >
                 Home
+              </a>
+            </li>
+            <li>
+              <a
+                href="Mrs_Uzor_Brochure.pdf"
+                target="_blank"
+                className="block text-sm.px-2.py-4 text-gray-500 font-semibold hover:bg-purple-500 hover:text-white transition duration-300"
+              >
+                Brochure
               </a>
             </li>
             <li>
@@ -126,7 +135,7 @@ const MainLayout = ({ children, emitSearchValue }) => {
                 className={
                   location === '/write'
                     ? 'block text-sm px-2 py-4 text-white bg-purple-500 font-semibold'
-                    : 'block text-sm.px-2.py-4 hover:bg-purple-500 hover:text-white transition duration-300'
+                    : 'block text-sm.px-2.py-4 text-gray-500 font-semibold hover:bg-purple-500 hover:text-white transition duration-300'
                 }
               >
                 Write Tribute
